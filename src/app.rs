@@ -11,7 +11,6 @@ pub struct MyApp {
     width: u32,
     original_texture: Option<TextureHandle>, // 原始图像的纹理
     grayscale_texture: Option<TextureHandle>, // 灰度图像的纹理
-    resized_texture: Option<TextureHandle>,  // 调整大小后的图像的纹理
 }
 
 impl Default for MyApp {
@@ -23,7 +22,6 @@ impl Default for MyApp {
             width: 100,
             original_texture: None,
             grayscale_texture: None,
-            resized_texture: None,
         }
     }
 }
@@ -82,12 +80,7 @@ impl App for MyApp {
                             }
                         });
 
-                        ui.push_id("resized_image", |ui| {
-                            if let Some(texture) = &self.resized_texture {
-                                ui.label("Resized Image:");
-                                ui.image(texture);
-                            }
-                        });
+
                     });
                 });
             });
@@ -131,14 +124,6 @@ impl MyApp {
         self.grayscale_texture =
             Some(ctx.load_texture("grayscale_image", grayscale_image, Default::default()));
 
-        // 调整大小
-        let resized_img =
-            grayscale_img.resize_exact(100, 100, image::imageops::FilterType::Nearest);
-        let resized_size = [resized_img.width() as usize, resized_img.height() as usize];
-        let resized_image =
-            egui::ColorImage::from_rgba_unmultiplied(resized_size, &resized_img.to_rgba8());
-        self.resized_texture =
-            Some(ctx.load_texture("resized_image", resized_image, Default::default()));
     }
 
     fn imaeg2ascii(&self, width: u32) -> String {
