@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
 <!-- Disable zooming: -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> -->
 
 <head>
-    <!-- change this to your project name -->
     <title>ascii converter</title>
-
     <!-- config for our rust wasm binary. go to https://trunkrs.dev/assets/#rust for more customization -->
     
-<script type="module" nonce="5/xcpbY4LqrFXJ0y5Zt0Qg==">
+<script type="module" nonce="yH0dqBGtYpKHndu2QBocTw==">
 import init, * as bindings from '/image2ascii-f769c54a6138d9e2.js';
 const wasm = await init('/image2ascii-f769c54a6138d9e2_bg.wasm');
 
@@ -116,8 +113,6 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
 <link rel="preload" href="/image2ascii-f769c54a6138d9e2_bg.wasm" crossorigin=anonymous integrity="sha384-GD0NQWPVtMJ8TK7olqGhMrz9kSPawadIaMAXUpULuOaXz4BOsJyBMg0GkzVUBPn8" as="fetch" type="application/wasm"></head>
 
 <body>
-    <!-- The WASM code will resize the canvas dynamically -->
-    <!-- the id is hardcoded in main.rs . so, make sure both match. -->
     <canvas id="the_canvas_id"></canvas>
 
     <!-- the loading spinner will be removed in main.rs -->
@@ -127,19 +122,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
         </p>
         <div class="lds-dual-ring"></div>
     </div>
-
-    <!--Register Service Worker. this will cache the wasm / js scripts for offline use (for PWA functionality). -->
-    <!-- Force refresh (Ctrl + F5) to load the latest files instead of cached files  -->
-    <script>
-        // We disable caching during development so that we always view the latest version.
-        if ('serviceWorker' in navigator && window.location.hash !== "#dev") {
-            window.addEventListener('load', function () {
-                navigator.serviceWorker.register('sw.js');
-            });
-        }
-    </script>
 </body>
 
 </html>
 
-<!-- Powered by egui: https://github.com/emilk/egui/ -->
